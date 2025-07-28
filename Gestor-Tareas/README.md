@@ -13,6 +13,8 @@ Una aplicación web simple desarrollada con Flask que te permite crear, gestiona
 - ✅ Almacenamiento en memoria (sin base de datos)
 - ✅ Mensajes flash para feedback
 - ✅ Diseño responsive
+- ✅ Animaciones y efectos visuales
+- ✅ Archivos estáticos organizados
 
 ## Instalación
 
@@ -133,7 +135,13 @@ Gestor-Tareas/
 │   ├── about.html            # Página acerca de
 │   ├── 404.html              # Página de error 404
 │   └── 500.html              # Página de error 500
-├── static/                   # Archivos estáticos (CSS, JS, imágenes)
+├── static/                   # Archivos estáticos
+│   ├── css/
+│   │   └── style.css         # Estilos personalizados
+│   ├── js/
+│   │   └── app.js            # JavaScript personalizado
+│   └── images/               # Imágenes y iconos
+│       └── README.md         # Documentación de imágenes
 ├── requirements.txt          # Dependencias del proyecto
 └── README.md                # Este archivo
 ```
@@ -173,6 +181,43 @@ export FLASK_ENV=production
 4. **Eliminar tarea**: Haz clic en "Eliminar" para borrar la tarea (con confirmación)
 5. **Ver estadísticas**: En la parte inferior se muestran las estadísticas de tareas
 
+## Características de la interfaz
+
+### Funcionalidades JavaScript
+- ✅ Auto-ocultar mensajes flash después de 5 segundos
+- ✅ Animaciones en las tareas al cargar
+- ✅ Efectos hover en botones
+- ✅ Confirmación personalizada para eliminar
+- ✅ Auto-focus en el campo de entrada
+- ✅ Atajo de teclado: Ctrl+Enter para enviar formulario
+- ✅ Estado de carga en el botón de enviar
+- ✅ Contador de tareas en tiempo real
+- ✅ Scroll suave para enlaces internos
+
+### Estilos CSS
+- ✅ Diseño responsive con Bootstrap 5
+- ✅ Colores personalizados para el navbar
+- ✅ Animaciones y transiciones
+- ✅ Efectos hover en tarjetas y botones
+- ✅ Estilos para tareas completadas/pendientes
+- ✅ Adaptaciones para dispositivos móviles
+
+## Personalización
+
+### Cambiar color del navbar
+Edita el archivo `templates/base.html` línea 35:
+```html
+<!-- Cambia bg-primary por: bg-success, bg-danger, bg-warning, bg-info, bg-light, bg-dark -->
+<!-- O usa clases personalizadas: navbar-custom-purple, navbar-custom-orange, etc. -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+```
+
+### Agregar estilos personalizados
+Edita el archivo `static/css/style.css` para agregar tus propios estilos.
+
+### Agregar funcionalidades JavaScript
+Edita el archivo `static/js/app.js` para agregar nuevas funcionalidades.
+
 ## Próximos pasos
 
 Para expandir esta aplicación, considera agregar:
@@ -193,6 +238,7 @@ Para expandir esta aplicación, considera agregar:
 - **Flask** - Framework web de Python
 - **Bootstrap 5** - Framework CSS para el frontend
 - **Bootstrap Icons** - Iconografía
+- **Animate.css** - Animaciones CSS
 - **Jinja2** - Motor de plantillas
 - **Python 3.x** - Lenguaje de programación
 - **Gunicorn** - Servidor WSGI para producción (Linux/macOS)
@@ -201,75 +247,3 @@ Para expandir esta aplicación, considera agregar:
 ## Licencia
 
 Este proyecto es de código abierto y está disponible bajo la licencia MIT. 
-
-##  Resumen: Cómo usar servidores WSGI de producción
-
-He configurado tu aplicación para usar servidores WSGI de producción. Aquí tienes las opciones:
-
-###  **Para Linux/macOS (Gunicorn):**
-
-1. **Instalar dependencias:**
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-2. **Ejecutar con script automático:**
-   ```bash
-   chmod +x start_production.sh
-   ./start_production.sh
-   ```
-
-3. **O ejecutar manualmente:**
-   ```bash
-   gunicorn -c gunicorn.conf.py wsgi:app
-   ```
-
-### 🪟 **Para Windows (Waitress):**
-
-1. **Instalar dependencias:**
-   ```cmd
-   pip install -r requirements.txt
-   ```
-
-2. **Ejecutar con script automático:**
-   ```cmd
-   start_production.bat
-   ```
-
-3. **O ejecutar manualmente:**
-   ```cmd
-   python waitress_server.py
-   ```
-
-### 🔧 **Configuración importante para producción:**
-
-1. **Cambiar la SECRET_KEY:**
-   ```bash
-   export SECRET_KEY="tu-clave-secreta-muy-segura-aqui"
-   ```
-
-2. **La aplicación estará disponible en:**
-   ```
-   http://localhost:8000
-   ```
-
-###  **Ventajas de usar servidores WSGI de producción:**
-
-- ✅ **Mejor rendimiento** - Múltiples workers
-- ✅ **Más estable** - Sin reinicios automáticos
-- ✅ **Logging apropiado** - Para monitoreo
-- ✅ **Seguridad** - Sin modo debug
-- ✅ **Escalabilidad** - Configuración optimizada
-
-### 🚨 **Diferencias con el servidor de desarrollo:**
-
-| Característica | Desarrollo | Producción |
-|----------------|------------|------------|
-| Puerto | 5000 | 8000 |
-| Debug | ✅ | ❌ |
-| Workers | 1 | Múltiples |
-| Reinicio automático | ✅ | ❌ |
-| Logging | Básico | Avanzado |
-| Rendimiento | Bajo | Alto |
-
-Ahora tu aplicación está lista para ser desplegada en producción con un servidor WSGI apropiado. ¡Los scripts automáticos te facilitarán el proceso! 
