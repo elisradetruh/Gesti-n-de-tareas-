@@ -231,7 +231,7 @@ Para expandir esta aplicación, considera agregar:
 - 🔧 Exportar tareas
 - 🔧 API REST completa
 - 🔧 Tests unitarios
-- 🔧 Docker containerization
+- 🔧 Docker containerization.
 
 ## Tecnologías utilizadas
 
