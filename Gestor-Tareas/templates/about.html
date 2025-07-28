@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+
+{% block title %}Acerca de - Gestor de Tareas{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8 mx-auto">
+        <h1 class="mb-4">Acerca del Gestor de Tareas</h1>
+        
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">Descripción</h5>
+                <p class="card-text">
+                    El Gestor de Tareas es una aplicación web simple desarrollada con Flask que te permite 
+                    crear, gestionar y hacer seguimiento de tus tareas diarias. Es perfecta para organizar 
+                    tu trabajo y mantener un control de lo que necesitas hacer.
+                </p>
+            </div>
+        </div>
+        
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">Funcionalidades</h5>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <i class="bi bi-plus-circle text-success"></i> 
+                        <strong>Agregar tareas:</strong> Crea nuevas tareas fácilmente
+                    </li>
+                    <li class="list-group-item">
+                        <i class="bi bi-check-circle text-primary"></i> 
+                        <strong>Marcar como completada:</strong> Marca las tareas cuando las termines
+                    </li>
+                    <li class="list-group-item">
+                        <i class="bi bi-arrow-counterclockwise text-warning"></i> 
+                        <strong>Desmarcar tareas:</strong> Puedes desmarcar tareas si cambias de opinión
+                    </li>
+                    <li class="list-group-item">
+                        <i class="bi bi-trash text-danger"></i> 
+                        <strong>Eliminar tareas:</strong> Elimina tareas que ya no necesitas
+                    </li>
+                    <li class="list-group-item">
+                        <i class="bi bi-graph-up text-info"></i> 
+                        <strong>Estadísticas:</strong> Ve el progreso de tus tareas
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">Tecnologías utilizadas</h5>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Flask - Framework web de Python</li>
+                    <li class="list-group-item">Bootstrap 5 - Framework CSS para el diseño</li>
+                    <li class="list-group-item">Bootstrap Icons - Iconografía</li>
+                    <li class="list-group-item">Jinja2 - Motor de plantillas</li>
+                    <li class="list-group-item">Python 3.x - Lenguaje de programación</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Estructura del proyecto</h5>
+                <pre class="bg-light p-3 rounded"><code>Gestor-Tareas/
+├── main.py              # Aplicación principal Flask
+├── templates/           # Plantillas HTML
+│   ├── base.html       # Plantilla base con Bootstrap
+│   ├── index.html      # Página principal con lista de tareas
+│   ├── about.html      # Página acerca de
+│   ├── 404.html        # Página de error 404
+│   └── 500.html        # Página de error 500
+├── static/             # Archivos estáticos (CSS, JS, imágenes)
+├── requirements.txt    # Dependencias del proyecto
+└── README.md          # Documentación</code></pre>
+            </div>
+        </div>
+        
+        <div class="text-center mt-4">
+            <a href="{{ url_for('index') }}" class="btn btn-primary">
+                <i class="bi bi-house"></i> Volver al inicio
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %} 

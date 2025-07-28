@@ -1,0 +1,133 @@
+{% extends "base.html" %}
+
+{% block title %}Gestor de Tareas{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8 mx-auto">
+        <h1 class="text-center mb-4">Gestor de Tareas</h1>
+        
+        <!-- Flash Messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ 'danger' if category == 'error' else category }} alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        
+        <!-- Agregar tarea -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5 class="mb-0">Agregar Nueva Tarea</h5>
+            </div>
+            <div class="card-body">
+                <form method="POST" action="{{ url_for('agregar_tarea') }}">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <input type="text" 
+                                   class="form-control" 
+                                   name="texto" 
+                                   placeholder="Escribe tu tarea aquí..." 
+                                   required>
+                        </div>
+                        <div class="col-md-4">
+                            <button type="submit" class="btn btn-primary w-100">
+                                <i class="bi bi-plus-circle"></i> Agregar Tarea
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <!-- Task List -->
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">Lista de Tareas</h5>
+                <span class="badge bg-primary">{{ tasks|length }} tareas</span>
+            </div>
+            <div class="card-body">
+                {% if tasks %}
+                    <div class="list-group">
+                        {% for task in tasks %}
+                            <div class="list-group-item d-flex justify-content-between align-items-center {% if task.hecho %}list-group-item-success{% endif %}">
+                                <div class="d-flex align-items-center">
+                                    <span class="me-3">
+                                        {% if task.hecho %}
+                                            <i class="bi bi-check-circle-fill text-success"></i>
+                                        {% else %}
+                                            <i class="bi bi-circle text-muted"></i>
+                                        {% endif %}
+                                    </span>
+                                    <div>
+                                        <span class="{% if task.hecho %}text-decoration-line-through text-muted{% endif %}">
+                                            {{ task.texto }}
+                                        </span>
+                                        <br>
+                                        <small class="text-muted">Creada: {{ task.fecha_creacion }}</small>
+                                    </div>
+                                </div>
+                                <div class="btn-group" role="group">
+                                    <a href="{{ url_for('completar_tarea', task_id=task.id) }}" 
+                                       class="btn btn-sm {% if task.hecho %}btn-warning{% else %}btn-success{% endif %}">
+                                        {% if task.hecho %}
+                                            <i class="bi bi-arrow-counterclockwise"></i> Desmarcar
+                                        {% else %}
+                                            <i class="bi bi-check"></i> Completar
+                                        {% endif %}
+                                    </a>
+                                    <a href="{{ url_for('eliminar_tarea', task_id=task.id) }}" 
+                                       class="btn btn-sm btn-danger"
+                                       onclick="return confirm('¿Estás seguro de que quieres eliminar esta tarea?')">
+                                        <i class="bi bi-trash"></i> Eliminar
+                                    </a>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <div class="text-center py-4">
+                        <i class="bi bi-list-check display-1 text-muted"></i>
+                        <p class="lead text-muted mt-3">No hay tareas pendientes</p>
+                        <p class="text-muted">¡Agrega tu primera tarea usando el formulario de arriba!</p>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+        
+        <!-- Statistics -->
+        {% if tasks %}
+            <div class="row mt-4">
+                <div class="col-md-4">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ tasks|length }}</h5>
+                            <p class="card-text">Total de tareas</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <h5 class="card-title text-success">{{ tasks|selectattr('hecho')|list|length }}</h5>
+                            <p class="card-text">Completadas</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <h5 class="card-title text-warning">{{ tasks|rejectattr('hecho')|list|length }}</h5>
+                            <p class="card-text">Pendientes</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %} 
