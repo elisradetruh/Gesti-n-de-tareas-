@@ -10,7 +10,7 @@
         body {
             padding-top: 2rem;
             padding-bottom: 2rem;
-            background-color: #fcf5c2;
+            background-color: #d85a5a;
         }
         .navbar-brand {
             font-weight: bold;
@@ -29,10 +29,33 @@
         .list-group-item:last-child {
             border-bottom: none;
         }
+        
+        /* Colores personalizados para el navbar */
+        .navbar-custom-purple {
+            background-color: #6f42c1 !important;
+        }
+        .navbar-custom-orange {
+            background-color: #fd7e14 !important;
+        }
+        .navbar-custom-teal {
+            background-color: #20c997 !important;
+        }
+        .navbar-custom-pink {
+            background-color: #e83e8c !important;
+        }
+        .navbar-custom-indigo {
+            background-color: #6610f2 !important;
+        }
+        .navbar-custom-cyan {
+            background-color: #ef3b0e !important;
+        }
     </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+    <!-- CAMBIA EL COLOR DEL NAVBAR AQUÍ -->
+    <!-- Opciones: bg-primary, bg-secondary, bg-success, bg-danger, bg-warning, bg-info, bg-light, bg-dark -->
+    <!-- O usa clases personalizadas: navbar-custom-purple, navbar-custom-orange, etc. -->
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom-cyan fixed-top">
         <div class="container">
             <a class="navbar-brand" href="{{ url_for('index') }}">
                 <i class="bi bi-list-check"></i> Gestor de Tareas
